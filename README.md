@@ -21,17 +21,17 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-    require 'amazon_mws_products'
-    require 'ostruct'
+require 'amazon_mws_products'
+require 'ostruct'
 
-    account = OpenStruct.new(seller_id:         "your mws seller id",
-                             aws_access_key_id: "your mws access key",
-                             marketplace_id:    "the marketplace id",
-                             secret_access_key: "your secret access key")
+account = OpenStruct.new(seller_id:         "your mws seller id",
+                         aws_access_key_id: "your mws access key",
+                         marketplace_id:    "the marketplace id",
+                         secret_access_key: "your secret access key")
 
-    client = AmazonMwsProducts::ListMatchingProducts.new(account, "harry potter dvd")
-    response = client.execute # response body will be a Nokogiri::XML::Document
-    puts response.body.to_xml
+client = AmazonMwsProducts::ListMatchingProducts.new(account, "harry potter dvd")
+response = client.execute # response body will be a Nokogiri::XML::Document
+puts response.body.to_xml
 ```
 
 ## Contributing
