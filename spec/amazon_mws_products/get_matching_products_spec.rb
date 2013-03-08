@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pp'
 
 module AmazonMwsProducts
   describe GetMatchingProducts do
@@ -26,7 +25,7 @@ module AmazonMwsProducts
 
           a_request(:get, "https://mws.amazonservices.com/Products/2011-10-01").
             with(:query => hash_including(
-            'AWSAccessKeyID'   => account.aws_access_key_id,
+            'AWSAccessKeyId'   => account.aws_access_key_id,
             'Action'           => 'GetMatchingProduct',
             'SellerId'         => account.seller_id,
             'SignatureVersion' => '2',
@@ -51,7 +50,7 @@ module AmazonMwsProducts
             true
           end.should have_been_made
 
-          sig.should == '995sAjBV4j9368BZjAsFQ2vpfyGfICzOb9QPVDSNmfc='
+          sig.should == 'Y42l/KzBlLDfka9hFDx2QwTMJCWQsFoKA68SOgvSWx4='
         end
       end
 

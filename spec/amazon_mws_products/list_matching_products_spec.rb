@@ -25,7 +25,7 @@ module AmazonMwsProducts
 
           a_request(:get, "https://mws.amazonservices.com/Products/2011-10-01").
             with(:query => hash_including(
-            'AWSAccessKeyID'   => account.aws_access_key_id,
+            'AWSAccessKeyId'   => account.aws_access_key_id,
             'Action'           => 'ListMatchingProducts',
             'SellerId'         => account.seller_id,
             'SignatureVersion' => '2',
@@ -33,7 +33,7 @@ module AmazonMwsProducts
             'Version'          => '2011-10-01',
             'SignatureMethod'  => 'HmacSHA256',
             'MarketplaceId'    => account.marketplace_id,
-            'Query'            => "harry potter dvd"
+            'Query'            => "harry%20potter%20dvd"
           )).should have_been_made.once
         end
       end
@@ -48,7 +48,7 @@ module AmazonMwsProducts
             true
           end.should have_been_made
 
-          sig.should == 'FSQViPVNqmUVncKxjzyzc3qCytYdm yQ0VwzgalfG9I='
+          sig.should == 'kMBqDjSPb8hLxTWAb6Tg6iQYW5huO4qRBgC ZfI86iQ='
         end
       end
     end
