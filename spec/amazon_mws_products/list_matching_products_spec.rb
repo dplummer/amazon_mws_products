@@ -10,8 +10,12 @@ module AmazonMwsProducts
     end
 
     let(:query) { "harry potter dvd" }
+    let(:options) {{
+      account: account,
+      query: query
+    }}
 
-    subject { ListMatchingProducts.new(account, query) }
+    subject { ListMatchingProducts.new(options) }
 
     before(:each) do
       stub_request(:get, %r{^https://mws.amazonservices.com/Products/2011-10-01}).
@@ -39,7 +43,12 @@ module AmazonMwsProducts
       end
 
       context "query context id included in request" do
-        subject { ListMatchingProducts.new(account, query, "Toys") }
+        let(:options) {{
+          account: account,
+          query: query,
+          query_context_id: "Toys"
+        }}
+
         it "adds the proper query parameter" do
           subject.execute
 

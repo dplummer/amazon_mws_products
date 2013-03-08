@@ -2,10 +2,10 @@ module AmazonMwsProducts
   class ListMatchingProducts
     attr_reader :account, :query, :query_context_id
 
-    def initialize(account, query, query_context_id = nil)
-      @account = account
-      @query = query
-      @query_context_id = query_context_id
+    def initialize(options)
+      @account          = options.fetch(:account)
+      @query            = options.fetch(:query)
+      @query_context_id = options[:query_context_id]
     end
 
     def execute

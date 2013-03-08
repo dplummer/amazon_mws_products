@@ -11,7 +11,11 @@ module AmazonMwsProducts
 
     let(:asins) {%w{B002QYOP72 B009AWSLFK B008BV6XA6}}
 
-    subject { GetMatchingProducts.new(account, asins) }
+    let(:options) {{
+      account: account,
+      asins: asins
+    }}
+    subject { GetMatchingProducts.new(options) }
 
     before(:each) do
       stub_request(:get, %r{^https://mws.amazonservices.com/Products/2011-10-01}).

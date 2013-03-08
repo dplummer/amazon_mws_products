@@ -2,9 +2,9 @@ module AmazonMwsProducts
   class GetMatchingProducts
     attr_reader :account, :asins
 
-    def initialize(account, asins)
-      @account = account
-      @asins = asins
+    def initialize(options)
+      @account = options.fetch(:account)
+      @asins   = options.fetch(:asins)
     end
 
     def execute
