@@ -4,8 +4,6 @@ A client for the AmazonMWS Products API as defined by:
 
 https://images-na.ssl-images-amazon.com/images/G/01/mwsportal/doc/en_US/products/MWSProductsApiReference._V388666043_.pdf
 
-TODO: Write a gem description
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,7 +20,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+    require 'amazon_mws_products'
+    require 'ostruct'
+
+    account = OpenStruct.new(seller_id:         "your mws seller id",
+                             aws_access_key_id: "your mws access key",
+                             marketplace_id:    "the marketplace id",
+                             secret_access_key: "your secret access key")
+
+    client = AmazonMwsProducts::ListMatchingProducts.new(account, "harry potter dvd")
+    response = client.execute # response body will be a Nokogiri::XML::Document
+    puts response.body.to_xml
+```
 
 ## Contributing
 
