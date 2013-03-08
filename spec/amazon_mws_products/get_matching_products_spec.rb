@@ -4,9 +4,9 @@ require 'pp'
 module AmazonMwsProducts
   describe GetMatchingProducts do
     let(:account) do
-      OpenStruct.new(:seller_id => 'seller id',
-                     :aws_access_key_id => 'access key',
-                     :marketplace_id => 'marketplace id',
+      OpenStruct.new(:seller_id => 'sellerid',
+                     :aws_access_key_id => 'accesskey',
+                     :marketplace_id => 'marketplaceid',
                      :secret_access_key => 'secret key')
     end
 
@@ -21,7 +21,7 @@ module AmazonMwsProducts
 
     describe "#execute" do
       it "builds the correct url and request parameters" do
-        Timecop.freeze(DateTime.new(2012, 3, 14, 15, 9, 26)) do
+        Timecop.freeze(DateTime.new(2012, 3, 14, 15, 9, 26, Rational(-7,24))) do
           subject.execute
 
           a_request(:get, "https://mws.amazonservices.com/Products/2011-10-01").
@@ -30,9 +30,8 @@ module AmazonMwsProducts
             'Action'           => 'GetMatchingProduct',
             'SellerId'         => account.seller_id,
             'SignatureVersion' => '2',
-            'Timestamp'        => '2012-03-14T15:09:26Z',
+            'Timestamp'        => '2012-03-14T21:09:26Z',
             'Version'          => '2011-10-01',
-            'Signature'        => 'EqwmT8wu36En3adzLfUKjhC dVgG0bL9j8FDvoM/OhQ=',
             'SignatureMethod'  => 'HmacSHA256',
             'MarketplaceId'    => account.marketplace_id,
             'ASINList.ASIN.1'  => asins[0],
@@ -43,7 +42,7 @@ module AmazonMwsProducts
       end
 
       it "signs the request" do
-        Timecop.freeze(DateTime.new(2012, 3, 14, 15, 9, 26)) do
+        Timecop.freeze(DateTime.new(2012, 3, 14, 15, 9, 26, Rational(-7,24))) do
           subject.execute
 
           sig = nil
@@ -52,7 +51,7 @@ module AmazonMwsProducts
             true
           end.should have_been_made
 
-          sig.should == 'EqwmT8wu36En3adzLfUKjhC dVgG0bL9j8FDvoM/OhQ='
+          sig.should == '995sAjBV4j9368BZjAsFQ2vpfyGfICzOb9QPVDSNmfc='
         end
       end
 

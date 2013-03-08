@@ -4,13 +4,13 @@ require 'uri'
 
 module AmazonMwsProducts
   class GetMatchingProducts
-    AWS_API_VERSION = '2011-10-01'
+    AWS_API_VERSION   = '2011-10-01'
     SIGNATURE_VERSION = '2'
-    SIGNATURE_METHOD = 'HmacSHA256'
-    AWS_ACTION = 'GetMatchingProduct'
+    SIGNATURE_METHOD  = 'HmacSHA256'
+    AWS_ACTION        = 'GetMatchingProduct'
 
-    ENDPOINT = 'mws.amazonservices.com'
-    PATH = '/Products/2011-10-01'
+    ENDPOINT          = 'mws.amazonservices.com'
+    PATH              = '/Products/2011-10-01'
 
     attr_reader :account, :asins
 
