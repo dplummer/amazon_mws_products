@@ -35,6 +35,7 @@ module AmazonMwsProducts
 
     def resource
       conn = Faraday.new(:url => uri)
+      conn.response :nokogiri_parser
       conn
     end
 

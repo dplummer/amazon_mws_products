@@ -15,7 +15,7 @@ module AmazonMwsProducts
 
     before(:each) do
       stub_request(:get, %r{^https://mws.amazonservices.com/Products/2011-10-01}).
-        to_return(:body => "resp body", :status => 200)
+        to_return(:body => "<foo>bar</foo>", :status => 200)
     end
 
     describe "#execute" do
@@ -52,6 +52,10 @@ module AmazonMwsProducts
 
           sig.should == 'Y42l/KzBlLDfka9hFDx2QwTMJCWQsFoKA68SOgvSWx4='
         end
+      end
+
+      it "parses the response" do
+        subject.execute.body.at('foo').text.should == 'bar'
       end
 
     end
