@@ -38,6 +38,19 @@ module AmazonMwsProducts
         end
       end
 
+      context "query context id included in request" do
+        subject { ListMatchingProducts.new(account, query, "Toys") }
+        it "adds the proper query parameter" do
+          subject.execute
+
+          a_request(:get, "https://mws.amazonservices.com/Products/2011-10-01").
+            with(:query => hash_including(
+              "Query"          => "harry%20potter%20dvd",
+              "QueryContextId" => "Toys"
+          )).should have_been_made.once
+        end
+      end
+
       it "signs the request" do
         Timecop.freeze(DateTime.new(2012, 3, 14, 15, 9, 26, Rational(-7,24))) do
           subject.execute
