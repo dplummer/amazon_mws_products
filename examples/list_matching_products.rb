@@ -16,6 +16,8 @@ account = OpenStruct.new(seller_id:         ENV["AWS_SELLER_ID"],
                          marketplace_id:    ENV["AWS_MARKETPLACE_ID"],
                          secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"])
 
-client = AmazonMwsProducts::ListMatchingProducts.new(account, "harry potter dvd")
+client = AmazonMwsProducts::ListMatchingProducts.new(account: account,
+                                                     query: "harry potter",
+                                                     query_context_id: "DVD")
 response = client.execute # response body will be a Nokogiri::XML::Document
 puts response.body.to_xml
